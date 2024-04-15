@@ -6,14 +6,12 @@ function App() {
   const { address } = useAccount();
 
   return (
-    <>
-    <div className="wallet-connect-btn">
-      <ConnectKitButton />
-    </div>
-      <div className="App">
-        <p>Hello {address}</p>
+      <div className="App w-screen h-screen flex justify-center items-center">
+      <div className="wallet-connect-btn">
+        <ConnectKitButton />
       </div>
-    </>
+        <p className="text-red-500">Hello {address}</p>
+      </div>
   );
 }
 

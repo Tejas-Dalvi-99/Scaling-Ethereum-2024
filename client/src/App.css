@@ -1,21 +1,10 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
-
 .wallet-connect-btn{
   position: absolute;
   top: 0;
   left: 0;
   margin: 2vw 2vw;
+}
+
+.App{
+  background-color: rgba(219, 255, 224, 0.9);
 }
