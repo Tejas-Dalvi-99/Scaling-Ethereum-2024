@@ -22,7 +22,11 @@ export const Web3Provider = ({ children }) => {
   return (
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
-        <ConnectKitProvider debugMode>{children}</ConnectKitProvider>
+        <ConnectKitProvider debugMode customTheme={{
+          "--ck-connectbutton-color" : "#fff",
+          "--ck-connectbutton-background" : "rgba(240, 151, 45,0.8)",
+          "--ck-connectbutton-hover-background" : "rgba(240, 151, 45,0.7)",
+        }}>{children}</ConnectKitProvider>
       </QueryClientProvider>
     </WagmiProvider>
   );

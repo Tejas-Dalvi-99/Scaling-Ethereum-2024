@@ -1,0 +1,45 @@
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 40px;
+  padding-right: 50px;
+  align-items: center;
+  height: 10%;
+  /* border: 2px solid red; */
+  box-sizing: border-box;
+  /* background-color: rgba(231, 224, 255,0.7); */
+  backdrop-filter: blur(5px);
+}
+
+.page-links {
+  color: #f0972d;
+  display: flex;
+  gap: 3vw;
+}
+
+.logo h1{
+  font-size: 2.5vw;
+  font-family:"Great Vibes";
+  color: #f0972d;
+
+}
+
+.page-links .link {
+  font-size: 18px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 600;
+  border-radius: 25px;
+  padding: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+  transition: ease-in-out 0.2s;
+}
+
+.page-links .link:hover {
+  background-color: rgb(240, 151, 45);
+  color: #003142;
+}
