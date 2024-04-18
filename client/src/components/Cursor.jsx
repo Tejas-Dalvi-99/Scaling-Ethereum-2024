@@ -28,7 +28,7 @@ function Cursor() {
     }
     if (dotBig) {
       gsap.to(cursorRef.current, { scale: 0 });
-      gsap.to(dotRef.current, { scale: 6 });
+      gsap.to(dotRef.current, { scale: 8 });
       // cursorTextRef.current.style.display = 'block';
     }
   });

@@ -42,4 +42,5 @@
 .page-links .link:hover {
   background-color: rgb(240, 151, 45);
   color: #003142;
+  cursor: pointer;
 }

@@ -7,7 +7,7 @@ function Navbar() {
   const navigateTo = useNavigate();
   return (
     <div className="nav">
-      <div className="logo">
+      <div className="logo dotBig">
         <motion.h1
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -20,31 +20,31 @@ function Navbar() {
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ ease: "easeInOut", duration: 1.5 }}
+          transition={{ ease: "easeInOut", duration: 1 }}
           className="link dotBig"
           onClick={() => navigateTo("/")}
         >
-          Home1
+          Home
         </motion.p>
 
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ ease: "easeInOut", duration: 1.5, times: [0.1] }}
+          transition={{ ease: "easeInOut", duration: 1, times: [0.1] }}
           className="link dotBig"
-          onClick={() => navigateTo("/home2")}
+          onClick={() => navigateTo("/generateBill")}
         >
-          Home2
+          Create Order
         </motion.p>
 
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ ease: "easeInOut", duration: 1.5, times: [0.3] }}
+          transition={{ ease: "easeInOut", duration: 1, times: [0.3] }}
           className="link dotBig"
-          onClick={() => navigateTo("/home3")}
+          onClick={() => navigateTo("/checkWarranty")}
         >
-          Home3
+          Warranty Check
         </motion.p>
       </div>
       <div className="connect-wallet-btn">

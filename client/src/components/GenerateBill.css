@@ -1,0 +1,94 @@
+.home2{
+    /* border: 2px solid green; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form{
+    box-sizing: border-box;
+    padding: 20px 10px;
+    width: 40%;
+    /* border: 1px solid #f0972d; */
+    background: linear-gradient(145deg, #002c3b, #003447);
+    box-shadow:  25px 25px 70px #002532,
+             -25px -25px 70px #003d53;
+    border-radius: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;  
+}
+
+.form h1{
+    font-family:sans-serif;
+    font-size: 1.7vw;
+    color: #f0972d;
+}
+
+.form input{
+    color: white;
+    box-sizing: border-box;
+    padding-left: 7px;
+    height: 6vh;
+    /* width: 100%; */
+    border-radius: 10px;
+    outline: none;
+    border: 3px solid rgba(240, 151, 45,0.5);
+    background-color: transparent;
+    transition: ease-in-out 0.5s;
+}
+
+.wallet-address{
+    width: 100%;
+}
+
+.date{
+    width: 48%;
+    padding-right: 10px;
+}
+
+.warranty{
+    width: 48%;
+}
+
+input:focus{
+    border: 3px solid #f0972d;
+}
+
+.message-box{
+    color: white;
+    background-color: transparent;
+    box-sizing: border-box;
+    padding-top: 10px;
+    padding-left: 10px;
+    height: 25vh;
+    width: 61vw;
+    resize: none;
+    border-radius: 10px;
+    border: 3px solid rgba(240, 151, 45, 0.5);
+    outline: none;
+    transition: ease-in-out 0.5s;
+}
+
+.message-box:focus{
+    border: 3px solid #f0972d;
+}
+
+.btn{
+    height: 6vh;
+    width: 10vw;
+    border-radius: 10px;
+    outline: none;
+    background-color: transparent;
+    border: 2px solid rgba(240, 151, 45,0.5);
+    transition: ease-in-out 0.3s;
+    font-weight: bold;
+    color: rgba(240, 151, 45,0.9);
+}
+
+.btn:hover{
+    color: white;
+    background-color: rgba(240, 151, 45,0.9);
+}
