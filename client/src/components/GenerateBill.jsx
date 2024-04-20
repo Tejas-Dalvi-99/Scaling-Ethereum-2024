@@ -66,7 +66,7 @@ function GenerateBill() {
         className="contact flex items-center justify-center"
       >
         <form className="form p-4" onSubmit={handleSubmit}>
-          <h1>Bill Details</h1>
+          <h1>Order Details</h1>
           <input
             required
             type="text"
