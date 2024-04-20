@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
+// import { privateKeyToAccount } from 'viem/accounts';
+// import { SignClient } from '@ethsign/sign-sdk';
 import "./GenerateBill.css";
 
 function GenerateBill() {
@@ -10,12 +12,19 @@ function GenerateBill() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("Date : "+selectedDate+" Address: "+customerAddr+" warranty: "+warranty+" Product: "+productInfo);
+    // createOrderAttestation();
+    // alert("Date : "+selectedDate+" Address: "+customerAddr+" warranty: "+warranty+" Product: "+productInfo);
     setCustomerAddr("");
     setProductInfo("");
     setSelectedDate("");
     setWarranty("");
   };
+
+  const privateKey = import.meta.env.VITE_SEPOLIA_PRIVATE_KEY;
+
+//   const client = new SignClient({
+//   account: privateKeyToAccount(privateKey),
+// });
 
   // async function createOrderAttestation() {
   //   const res = await client.createAttestation({
@@ -29,6 +38,8 @@ function GenerateBill() {
   //     },
   //     indexingValue: customerAddr.toLowerCase()
   //   });
+
+  //   console.log(res);
   // }
 
 
