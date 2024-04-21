@@ -34,8 +34,9 @@
 
 .cursor-text{
     display: none; 
-    font-size: 3px; 
+    font-size: 2px; 
     background-color: transparent;
+    color: white;
     font-weight: 400;
 }
 

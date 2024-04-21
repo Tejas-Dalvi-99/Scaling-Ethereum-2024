@@ -2,21 +2,24 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import axios from "axios";
 // import { decodeAbiParameters } from "viem";
-import './CheckWarranty.css';
+import "./CheckWarranty.css";
 
 function CheckWarranty() {
   const [customerAddr, setCustomerAddr] = useState("");
   const [attesterAddr, setAttesterAddr] = useState("");
-  const [attestations, setAttestations] = useState("");
-  const endpoint = import.meta.env.VITE_ENDPOINT
+  const [display, setDisplay] = useState(false);
+  const [attestations, setAttestations] = useState([]);
+  const endpoint = import.meta.env.VITE_ENDPOINT;
 
-  const handleSubmit =async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     // alert("Customer: "+customerAddr+" Attester: "+attesterAddr);
     await queryAttestations();
+    setDisplay(true)
     // console.log("state : ",attestations);
     // setCustomerAddr("");
     // setAttesterAddr("");
+    // findAttestation(, attestations);
   };
 
   async function makeAttestationRequest(endpoint, options) {
@@ -24,9 +27,9 @@ function CheckWarranty() {
     const res = await axios.request({
       url,
       headers: {
-        "Content-Type": "application/json; charset=UTF-8"
+        "Content-Type": "application/json; charset=UTF-8",
       },
-      ...options
+      ...options,
     });
     // throw API errors
     if (res.status !== 200) {
@@ -34,100 +37,101 @@ function CheckWarranty() {
     }
     // return original response
     return res.data;
-}
+  }
 
-async function queryAttestations() {
+  async function queryAttestations() {
     try {
-        const response = await makeAttestationRequest(
-            "index/attestations",
-            {
-                method: "GET",
-                params: {
-                    mode: "onchain",
-                    schemaId: endpoint,
-                    attester: attesterAddr, 
-                    indexingValue: customerAddr.toLowerCase(),
-                }
-            }
-        );
+      const response = await makeAttestationRequest("index/attestations", {
+        method: "GET",
+        params: {
+          mode: "onchain",
+          schemaId: endpoint,
+          attester: attesterAddr,
+          indexingValue: customerAddr.toLowerCase(),
+        },
+      });
 
-        console.log(response)
-        setAttestations(response.data.total)
+      console.log(response);
+      setAttestations(response.data.rows);
 
-        // Make sure the request was successfully processed.
-        if (!response.success) {
-            return { success: false, message: response?.message ?? "Attestation query failed." };
-        }
-
-        // Return a message if no attestations are found.
-        if (response.data?.total === 0) {
-            return { success: false, message: "No attestation for this address found." };
-        }
-
-        // Return all attestations that match our query.
+      // Make sure the request was successfully processed.
+      if (!response.success) {
         return {
-            success: true,
-            attestations: response.data.rows
+          success: false,
+          message: response?.message ?? "Attestation query failed.",
         };
+      }
+
+      // Return a message if no attestations are found.
+      if (response.data?.total === 0) {
+        return {
+          success: false,
+          message: "No attestation for this address found.",
+        };
+      }
+
+      // Return all attestations that match our query.
+      return {
+        success: true,
+        attestations: response.data.rows,
+      };
     } catch (error) {
-        return { success: false, message: error.message ?? "An error occurred during attestation query." };
+      return {
+        success: false,
+        message: error.message ?? "An error occurred during attestation query.",
+      };
     }
-}
+  }
 
+  // function findAttestation(message, attestations) {
+  //   // Iterate through the list of attestations
+  //   for (const att of attestations) {
+  //     if (!att.data) continue;
 
+  //     let parsedData = {};
 
-// function findAttestation(message, attestations) {
-//     // Iterate through the list of attestations
-//     for (const att of attestations) {
-//         if (!att.data) continue;
-
-//         let parsedData = {};
-
-//         // Parse the data.
-//         if (att.mode === "onchain") {
-//             // Looking for nested items in the on-chain schema
-//             try {
-//                 const data = decodeAbiParameters(
-//                     [att.dataLocation === "onchain" ? { components: att.schema.data, type: "tuple" } : { type: "string" }],
-//                     att.data
-//                 );
-//                 parsedData = data[0];
-//             } catch (error) {
-//                 // Looking for a regular schema format if the nested parse fails
-//                 try {
-//                     const data = decodeAbiParameters(
-//                         att.dataLocation === "onchain" ? att.schema.data : [{ type: "string" }],
-//                         att.data
-//                     );
-//                     const obj = {};
-//                     data.forEach((item, i) => {
-//                         obj[att.schema.data[i].name] = item;
-//                     });
-//                     parsedData = obj;
-//                 } catch (error) {
-//                     continue;
-//                 }
-//             }
-//         } else {
-//             // Try parsing as a string (off-chain attestation)
-//             try {
-//                 parsedData = JSON.parse(att.data);
-//             } catch (error) {
-//                 console.log(error);
-//                 continue;
-//             }
-//         }
-
-//         // Return the correct attestation and its parsed data.
-//         if (parsedData?.contractDetails === message) {
-//             return { parsedData, attestation: att };
-//         }
-//     }
-
-//     // Did not find the attestation we are looking for.
-//     return undefined;
-// }
-
+  //     // Parse the data.
+  //     if (att.mode === "onchain") {
+  //       // Looking for nested items in the on-chain schema
+  //       try {
+  //         const data = decodeAbiParameters(
+  //           [att.dataLocation === "onchain" ? { components: att.schema.data, type: "tuple" } : { type: "string" }],
+  //           att.data
+  //         );
+  //         parsedData = data[0];
+  //       } catch (error) {
+  //         // Looking for a regular schema format if the nested parse fails
+  //         try {
+  //           const data = decodeAbiParameters(
+  //             att.dataLocation === "onchain" ? att.schema.data : [{ type: "string" }],
+  //             att.data
+  //           );
+  //           const obj = {};
+  //           data.forEach((item, i) => {
+  //             obj[att.schema.data[i].name] = item;
+  //           });
+  //           parsedData = obj;
+  //         } catch (error) {
+  //           continue;
+  //         }
+  //       }
+  //     } else {
+  //       // Try parsing as a string (off-chain attestation)
+  //       try {
+  //         parsedData = JSON.parse(att.data);
+  //       } catch (error) {
+  //         console.log(error);
+  //         continue;
+  //       }
+  //     }
+  //     // Return the correct attestation and its parsed data.
+  //     if(parsedData.contractDetails === message) {
+  //       return { parsedData: parsedData, attestation: att };
+  //     }
+  //   }
+  //   // Did not find the attestation we are looking for.
+  //   return undefined;
+  // }
 
   return (
     <div className="home2 w-full p-2 mt-[7vh]">
@@ -165,9 +169,34 @@ async function queryAttestations() {
           </button>
         </form>
       </motion.div>
-      <h1 className="orderh1 absolute top-[10vw] text-3xl text-[#f0972d]">{attestations===0 ? "No Orders Found" : attestations && `${attestations} Orders found`}</h1>
+      {
+        display &&
+        <h1 className="orderh1 absolute top-[10vw] text-3xl text-[#f0972d]">
+        {attestations?.length === 0
+          ? "No Orders Found"
+          : attestations && `${attestations?.length} Orders found`}
+      </h1>
+        }
+     <div className="returned-data">
+        {attestations.length!==0 &&
+          attestations.map((elem, i) => {
+            return (
+              <>
+                <div key={elem.attestationId} className="record">
+                  <a
+                  style={{color:'#f0972d'}}
+                  target="_blank"
+                    href={`https://testnet-scan.sign.global/attestation/onchain_evm_11155111_${elem.attestationId}`}
+                  >
+                  {i+1 + ". "+elem.attestationId}
+                  </a>
+                </div>
+              </>
+            );
+          })}
+      </div>
     </div>
-  )
+  );
 }
 
-export default CheckWarranty
+export default CheckWarranty;

@@ -25,6 +25,8 @@ function Cursor() {
     if (noCircle) {
       gsap.to(cursorRef.current, { scale: 0 });
       gsap.to(dotRef.current, { scale: 1 });
+      // cursorTextRef.current.style.display = 'block';
+
     }
     if (dotBig) {
       gsap.to(cursorRef.current, { scale: 0 });
@@ -94,7 +96,7 @@ function Cursor() {
       <div id='custom-cursor' className='custom-cursor' ref={cursorRef}></div>
       <div id='dot' className='dot' ref={dotRef}>
         <span className='cursor-text' ref={cursorTextRef}>
-          Click to View
+          Long Press
         </span>
       </div>
     </>

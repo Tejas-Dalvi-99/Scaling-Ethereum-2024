@@ -37,6 +37,23 @@
     cursor: pointer;
 }
 
+input:focus{
+    border: 3px solid #f0972d;
+}
+
+.returned-data{
+    display: flex;
+    gap: 2vh;
+    flex-direction: column;
+    /* border: 2px solid blue; */
+}
+
+.record{
+    text-decoration: none;
+    color: #f0972d;
+    /* border: 2px solid red; */
+}
+
 @media (max-width:768px) {
     .form1{
         width: 70%;
